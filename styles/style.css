@@ -230,18 +230,6 @@ h4 {
 	font-weight: 400;
 	display: block;
 	padding-top: .25em;
-	padding-bottom: .25em;
-	color: #fff;
-}
-
-#hint {
-	margin: 0 auto;	
-	background: #cc324b;
-	padding: 1em 0.4em;
-	font-size: 1em;
-	font-weight: 400;
-	display: block;
-	padding-top: .25em;
 	color: #fff;
 }
 

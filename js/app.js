@@ -33,6 +33,7 @@ $(document).ready(function() {
     $("a.new").click(function(){
       $("span#count").text('0');
       $("ul#guessList").empty();
+      $("#feedback").text("Make your Guess!");
     });
   }
 
@@ -41,12 +42,15 @@ $(document).ready(function() {
   function validateGuess() {
     $("#guessButton").click(function() {
       currentGuess = $("#userGuess").val();
-      if(($.isNumeric(currentGuess)) && (currentGuess >= 0) && (currentGuess <= 100)) {
+      if(($.isNumeric(currentGuess)) && (currentGuess >= 0) && (currentGuess <= 100) && (currentGuess != randomNumber)) {
         $("ul#guessList").append("<li>"+ currentGuess + "</li>");
         $("span#count").text($("ul#guessList > li").size());
         $("#userGuess").val('');
         console.log("User guess = " + currentGuess);
         guessComparison(randomNumber, currentGuess);
+        return false;
+      } else if (currentGuess == randomNumber) {
+        alert("Wow! You've beat the game, please play again!");
         return false;
       } else {
         alert("You need to enter a valid number.");
@@ -80,22 +84,22 @@ $(document).ready(function() {
     console.log(comparison);  
     switch(true) {
     case(comparison >= 50) :
-      setFeedback("Ice Cold");
+      setFeedback("Ice Cold, Baby.");
       break;
     case((comparison >= 30) && (comparison <= 49)):
-      setFeedback('Cold');
+      setFeedback('Still Cold...');
       break;
     case((comparison >= 20) && (comparison <= 29)):
-      setFeedback('Warm');
+      setFeedback('Getting Warmer...');
       break;
     case((comparison >= 10) && (comparison <= 19)):
-      setFeedback('Hot');
+      setFeedback("It's getting hot in here!");
       break;
     case((comparison >= 1) && (comparison <= 9)):
-      setFeedback('Boiling Hot!');
+      setFeedback("Boiling Hot!!!");
       break;
     case(comparison == 0):
-      alert("Congrats, you've beat the game!");
+      alert("Congrats, you've beat the game! Please play again.");
       setFeedback('Bulls Eye!');
       break;
     }
@@ -105,22 +109,22 @@ $(document).ready(function() {
     console.log(comparison);  
     switch(true) {
     case(comparison <= -50) :
-      setFeedback("Ice Cold");
+      setFeedback("Ice Cold, Baby.");
       break;
     case((comparison <= -30) && (comparison >= -49)):
-      setFeedback('Cold');
+      setFeedback('Still Cold...');
       break;
     case((comparison <= -20) && (comparison >= -29)):
-      setFeedback('Warm');
+      setFeedback('Getting Warmer...');
       break;
     case((comparison <= -10) && (comparison >= -19)):
-      setFeedback('Hot');
+      setFeedback("It's getting hot in here!");
       break;
     case((comparison <= -1) && (comparison >= -9)):
-      setFeedback('Boiling Hot!');
+      setFeedback("Boiling Hot!!!");
       break;
     case(comparison == 0):
-      alert("Congrats, you've beat the game!");
+      alert("Congrats, you've beat the game! Please play again.");
       setFeedback('Bulls Eye!');
       break;
     }
