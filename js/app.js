@@ -27,17 +27,22 @@ function newGame() {
 }
 
 function generateNumber(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
+  console.log(Math.floor(Math.random() * (max - min)) + min);
 }
 
-function giveFeedback() {
-  // while("#userGuess" !== generateNumber()) { 
+function giveFeedback() { 
   $("#guessButton").click(function() {
     var currentGuess = $("#userGuess").val();
-    $("ul#guessList").append("<li>"+ currentGuess + "</li>");
-    $("span#count").text($("ul#guessList > li").size());
-    $("#userGuess").val('');
+    var parsedGuess = parseInt(currentGuess);
+    if(parsedGuess !== NaN) {
+      $("ul#guessList").append("<li>"+ parsedGuess + "</li>");
+      $("span#count").text($("ul#guessList > li").size());
+      $("#userGuess").val('');
     return false;
-  // }
-});
+    } else {
+      alert("You need to enter a valid number.");
+      $("#userGuess").val('');
+    return false;
+    }
+  });
 }
