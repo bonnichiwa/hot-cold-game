@@ -1,6 +1,8 @@
 
 $(document).ready(function() {
-  
+
+
+  var winGame = false;
   gameInstruction();
   generateNumber();
   newGame();
@@ -33,7 +35,9 @@ $(document).ready(function() {
     $("a.new").click(function(){
       $("span#count").text('0');
       $("ul#guessList").empty();
-      $("#feedback").text("Make your Guess!");
+      setFeedback("Make your Guess!");
+      randomNumber = (Math.floor(Math.random() * 100));
+      console.log("New random number generated = " + randomNumber);
     });
   }
 
@@ -42,14 +46,14 @@ $(document).ready(function() {
   function validateGuess() {
     $("#guessButton").click(function() {
       currentGuess = $("#userGuess").val();
-      if(($.isNumeric(currentGuess)) && (currentGuess >= 0) && (currentGuess <= 100) && (currentGuess != randomNumber)) {
+      if(($.isNumeric(currentGuess)) && (currentGuess >= 0) && (currentGuess <= 100) && (winGame == false)) {
         $("ul#guessList").append("<li>"+ currentGuess + "</li>");
         $("span#count").text($("ul#guessList > li").size());
         $("#userGuess").val('');
         console.log("User guess = " + currentGuess);
         guessComparison(randomNumber, currentGuess);
         return false;
-      } else if (currentGuess == randomNumber) {
+      } else if (winGame == true) {
         alert("Wow! You've beat the game, please play again!");
         return false;
       } else {
@@ -99,8 +103,9 @@ $(document).ready(function() {
       setFeedback("Boiling Hot!!!");
       break;
     case(comparison == 0):
-      alert("Congrats, you've beat the game! Please play again.");
+      alert("Wow, you've beat the game! Please play again.");
       setFeedback('Bulls Eye!');
+      winGame = true;
       break;
     }
   }
@@ -124,8 +129,9 @@ $(document).ready(function() {
       setFeedback("Boiling Hot!!!");
       break;
     case(comparison == 0):
-      alert("Congrats, you've beat the game! Please play again.");
+      alert("Wow, you've beat the game! Please play again.");
       setFeedback('Bulls Eye!');
+      winGame = true;
       break;
     }
   }
