@@ -4,7 +4,6 @@ $(document).ready(function() {
   gameInstruction();
   generateNumber();
   newGame();
-  guessComparison();
   validateGuess();
 
 
@@ -41,13 +40,13 @@ $(document).ready(function() {
 
   function validateGuess() {
     $("#guessButton").click(function() {
-      var currentGuess = $("#userGuess").val();
+      currentGuess = $("#userGuess").val();
       if(($.isNumeric(currentGuess)) && (currentGuess >= 0) && (currentGuess <= 100)) {
         $("ul#guessList").append("<li>"+ currentGuess + "</li>");
         $("span#count").text($("ul#guessList > li").size());
         $("#userGuess").val('');
         console.log("User guess = " + currentGuess);
-        guessComparison();
+        guessComparison(randomNumber, currentGuess);
         return false;
       } else {
         alert("You need to enter a valid number.");
@@ -58,12 +57,14 @@ $(document).ready(function() {
   }
 
   /*--- Determine if using negative or positive comparison ---*/
-  function guessComparison() {
-    if (randomNumber - $("#userGuess").val() > 0) {
-      positiveComparison();
-    } else {
-      negativeComparison();
-    }
+
+  function guessComparison(randomNum, userInput) {
+    console.log("Guess diff = " + ((randomNum) - (userInput)) );
+    // if (guessDiff > 0) {
+    //   positiveComparison();
+    // } else {
+    //   negativeComparison();
+    // }
   }
 
 
@@ -102,7 +103,7 @@ $(document).ready(function() {
   }
 
   function negativeComparison() {
-    var generateDiff = currentGuess - randomNumber;
+    var generateDiff = $("userGuess").val() - randomNumber;
     console.log(generateDiff);  
     switch(true) {
     case(generateDiff >= 50) :
