@@ -2,6 +2,7 @@
 $(document).ready(function() {
   gameInstruction();
   newGame();
+  giveFeedback();
 });
 
 function gameInstruction() {
@@ -19,7 +20,7 @@ function gameInstruction() {
 
 function newGame() {
   $("a.new").click(function(){
-    $("span#count").val('0');
+    $("span#count").text('0');
     $("ul#guessList").empty();
     generateNumber(1, 100);
   });
@@ -27,4 +28,16 @@ function newGame() {
 
 function generateNumber(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
+}
+
+function giveFeedback() {
+  // while("#userGuess" !== generateNumber()) { 
+  $("#guessButton").click(function() {
+    var currentGuess = $("#userGuess").val();
+    $("ul#guessList").append("<li>"+ currentGuess + "</li>");
+    $("span#count").text($("ul#guessList > li").size());
+    $("#userGuess").val('');
+    return false;
+  // }
+});
 }
