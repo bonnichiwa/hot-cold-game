@@ -60,68 +60,66 @@ $(document).ready(function() {
 
   function guessComparison(randomNum, userInput) {
     console.log("Guess diff = " + ((randomNum) - (userInput)) );
-    // if (guessDiff > 0) {
-    //   positiveComparison();
-    // } else {
-    //   negativeComparison();
-    // }
+    comparisonDiff = (randomNum - userInput);
+    if (comparisonDiff >= 0) {
+      positiveComparison(comparisonDiff);
+    } else {
+      negativeComparison(comparisonDiff);
+    }
   }
-
 
   /*--- Set feedback ---*/
 
-  function setFeedback() {
-    $("h2#feedback").text(feedback);
+  function setFeedback(feedback) {
+    $("#feedback").text(feedback);
   }
 
   /*--- Feedback changed according to user input ---*/
 
-  function positiveComparison() { 
-    var generateDiff = randomNumber - $("userGuess").val();
-    console.log(generateDiff);  
+  function positiveComparison(comparison) { 
+    console.log(comparison);  
     switch(true) {
-    case(generateDiff >= 50) :
+    case(comparison >= 50) :
       setFeedback("Ice Cold");
       break;
-    case((generateDiff >= 30) && (generateDiff <= 49)):
+    case((comparison >= 30) && (comparison <= 49)):
       setFeedback('Cold');
       break;
-    case((generateDiff >= 20) && (generateDiff <= 29)):
+    case((comparison >= 20) && (comparison <= 29)):
       setFeedback('Warm');
       break;
-    case((generateDiff >= 10) && (generateDiff <= 19)):
+    case((comparison >= 10) && (comparison <= 19)):
       setFeedback('Hot');
       break;
-    case((generateDiff >= 1) && (generateDiff <= 9)):
+    case((comparison >= 1) && (comparison <= 9)):
       setFeedback('Boiling Hot!');
       break;
-    case(generateDiff = 0):
+    case(comparison == 0):
       alert("Congrats, you've beat the game!");
       setFeedback('Bulls Eye!');
       break;
     }
   }
 
-  function negativeComparison() {
-    var generateDiff = $("userGuess").val() - randomNumber;
-    console.log(generateDiff);  
+  function negativeComparison(comparison) {
+    console.log(comparison);  
     switch(true) {
-    case(generateDiff >= 50) :
+    case(comparison <= -50) :
       setFeedback("Ice Cold");
       break;
-    case((generateDiff >= 30) && (generateDiff <= 49)):
+    case((comparison <= -30) && (comparison >= -49)):
       setFeedback('Cold');
       break;
-    case((generateDiff >= 20) && (generateDiff <= 29)):
+    case((comparison <= -20) && (comparison >= -29)):
       setFeedback('Warm');
       break;
-    case((generateDiff >= 10) && (generateDiff <= 19)):
+    case((comparison <= -10) && (comparison >= -19)):
       setFeedback('Hot');
       break;
-    case((generateDiff >= 1) && (generateDiff <= 9)):
+    case((comparison <= -1) && (comparison >= -9)):
       setFeedback('Boiling Hot!');
       break;
-    case(generateDiff = 0):
+    case(comparison == 0):
       alert("Congrats, you've beat the game!");
       setFeedback('Bulls Eye!');
       break;
